@@ -2,8 +2,6 @@ package com.anthive.blogservice.accountsystem.security;
 
 import com.anthive.blogservice.accountsystem.base.AccountRepository;
 import com.anthive.blogservice.accountsystem.base.model.Account;
-import com.anthive.blogservice.accountsystem.security.dto.AccountContext;
-import com.anthive.blogservice.accountsystem.security.dto.CustomPrincipal;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -33,8 +31,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         List<GrantedAuthority> authorities = account.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());
-        CustomPrincipal customPrincipal = new CustomPrincipal(account.getId(), account.getLoginId(), account.getPassword(), account.getEnabled());
-        return new AccountContext(customPrincipal, authorities);
+        return new AccountContext(account.getLoginId(), account.getPassword(), true, authorities);
     }
 
 }
