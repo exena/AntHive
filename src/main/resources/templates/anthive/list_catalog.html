@@ -1,0 +1,72 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/common :: head('게시판')">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common :: menu(post)">
+</nav>
+
+<div class="container">
+    <h2>게시판</h2>
+    <div class="cards-container">
+        <div th:each="post : ${posts}" class="card">
+            <img class="card-img-top" src='https://coffective.com/wp-content/uploads/2018/06/default-featured-image.png.jpg'>
+            <div class="card-body">
+                <h5 th:text="${post.title}" class="card-title">Card title</h5>
+                <a th:text="${post.content}" th:href="@{/anthive/{account}/post/{post}(account=${post.account.loginId},post=${post.id})}" class="card-text">text</a>
+                <span th:text="${post.account.loginId}"> 작성자이름오는곳 </span>
+                <div style="float:right;" th:classappend="${post.account.loginId != #authentication.name}? 'd-none'">
+                    <a th:href="@{/anthive/form(postId=${post.id})}" >
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a style="color:#007bff; cursor:pointer;" th:onclick="|deletePost(${post.id})|">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${1 == startPage}? 'disabled'">
+                <a class="page-link" th:href="@{/anthive/{account}/catalog-list(page=${posts.pageable.pageNumber - 4},account=${blogger})}" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item" th:classappend="${i == posts.pageable.pageNumber + 1}? 'disabled'" th:each="i: ${#numbers.sequence(startPage,endPage)}">
+                <a class="page-link" th:href="@{/anthive/{account}/catalog-list(page=${i},account=${blogger})}" th:text="${i}">1</a>
+            </li>
+            <li class="page-item" th:classappend="${posts.totalPages == endPage || posts.totalPages == 0 }? 'disabled'">
+                <a class="page-link" th:href="@{/anthive/${account}/catalog-list(account=${blogger},page=(${posts.pageable.pageNumber + 6}>${posts.totalPages})? ${posts.totalPages} : ${posts.pageable.pageNumber + 6})}">Next</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="text-right">
+        <a type="button" class="btn btn-primary" th:href="@{/anthive/form}">쓰기</a>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $(".card-text").each(function() {
+        var text = $(this).text();
+        $(this).text(text.replace(/(<([^>]+)>)/ig,""));
+    });
+
+    function deletePost(id){
+        $.ajax({
+            headers:{"[[${_csrf.headerName}]]":"[[${_csrf.token}]]"},
+            url : '/api/post/'+id,
+            type: 'DELETE',
+            success: function(result){
+                window.location.reload();
+            }
+        });
+    }
+</script>
+</body>
+</html>

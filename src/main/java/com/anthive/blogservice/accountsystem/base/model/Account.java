@@ -33,4 +33,8 @@ public class Account {
         this.enabled = enabled;
         this.roles = roles;
     }
+
+    public Account(String loginId){
+        this.loginId = loginId;
+    }
 }

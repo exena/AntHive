@@ -1,0 +1,111 @@
+<!doctype html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/common :: head('게시판')">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common :: menu(blog)">
+</nav>
+
+<div class="container" style="padding: 0;">
+    <form action="#" th:action="@{/anthive/form}" th:object="${post}" method="post" id="EntireForm">
+        <input type="hidden" th:field="*{postId}" id="formId">
+        <!--<input type="hidden" th:field="*{images}" id="ImagesList">-->
+        <div id="toolbar"  class="sticky-top" style="background-color:white;">
+            <!-- Add font size dropdown -->
+            <span class="ql-formats">
+                <select class="ql-size">
+                    <option value="0.56rem">-5단계</option>
+                    <option value="0.583rem">-4단계</option>
+                    <option value="0.668rem">-3단계</option>
+                    <option value="0.75rem">-2단계</option>
+                    <option value="0.833rem">-1단계</option>
+                    <option value="0.9rem">기본</option>
+                    <option value="1.16rem">1단계</option>
+                    <option value="1.25rem">2단계</option>
+                    <option value="1.332rem">3단계</option>
+                    <option value="1.417rem">4단계</option>
+                    <option value="1.5rem">5단계</option>
+                </select>
+            </span>
+            <!-- Add a bold button -->
+            <span class="ql-formats">
+                <button class="ql-bold"></button>
+                <button class="ql-italic"></button>
+                <button class="ql-underline"></button>
+                <button class="ql-strike"></button>
+            </span>
+            <!-- Add font color dropdown -->
+            <span class="ql-formats">
+                <select class="ql-color"></select>
+                <select class="ql-background"></select>
+            </span>
+            <!-- Add subscript and superscript buttons -->
+            <span class="ql-formats">
+                <button class="ql-script" value="sub"></button>
+                <button class="ql-script" value="super"></button>
+            </span>
+            <!-- Add text alignment dropdown -->
+            <span class="ql-formats">
+                <button class="ql-direction"></button>
+                <select class="ql-align"></select>
+            </span>
+            <!-- Add image button -->
+            <span class="ql-formats">
+                <button class="ql-link"></button>
+                <button class="ql-image"></button>
+                <button class="ql-video"></button>
+            </span>
+            <!-- Add code-block button -->
+            <span class="ql-formats">
+                <button class="ql-blockquote"></button>
+                <button class="ql-code-block"></button>
+            </span>
+            <!-- Add clean button -->
+            <span class="ql-formats">
+                <button class="ql-clean"></button>
+            </span>
+        </div>
+        <div class="form-group" style="margin-bottom: 0;">
+            <input style="border-width: 0 1px; font-size: 20px; box-sizing: border-box; padding: 15px; width: 100%" placeholder="제목"
+                   type="text" class="ql-container ql-snow" th:classappend="${#fields.hasErrors('title')}? 'is-invalid'" id="title" th:field="*{title}">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">
+                제목이 형식과 다름
+            </div>
+        </div>
+        <div class="form-group" id="FormBody">
+            <!--This textarea will not be shown to user. (Quill adds bootstrap d-none class)-->
+            <textarea id="QuillTextarea" name="input" class="quill-editor" th:field="*{content}">
+                <p>Hello World!</p>
+            </textarea>
+        </div>
+        <div class="text-right">
+            <a type="button" class="btn btn-primary" th:href="@{/anthive/{account}/catalog-list(account=${#authentication.name})}">취소</a>
+            <button class="btn btn-primary" type="submit">확인</button>
+        </div>
+    </form>
+</div>
+<!--얘네가 맨 아래에 있어야 제일 앞에 보임-->
+<div class='backLayer'> </div>
+<div id = "loadingDiv">
+    <div style="width:50px; height:50px;"><div class="loader"></div></div>
+    <div style="height:10px;"></div>
+    <progress value="0" max="100" style="width:80%;"></progress>
+</div>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="/js/quill-blot-formatter.min.js"></script>
+<script src="/js/loading-screen.js"></script>
+<script src="/js/quill-config.js"></script>
+<script>
+
+</script>
+<!--  -->
+</body>
+</html>
