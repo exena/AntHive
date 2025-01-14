@@ -1,4 +1,4 @@
-package com.anthive.blogservice.basicsystem.accountsystem.security.dto;
+package com.anthive.blogservice.accountsystem.security.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

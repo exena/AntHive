@@ -1,4 +1,4 @@
-package com.anthive.blogservice.basicsystem.accountsystem.base.dto;
+package com.anthive.blogservice.accountsystem.base.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

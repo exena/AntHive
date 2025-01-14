@@ -1,6 +1,6 @@
-package com.anthive.blogservice.basicsystem.accountsystem.base;
+package com.anthive.blogservice.accountsystem.base;
 
-import com.anthive.blogservice.basicsystem.accountsystem.base.dto.AccountRegisterRequest;
+import com.anthive.blogservice.accountsystem.base.dto.AccountRegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

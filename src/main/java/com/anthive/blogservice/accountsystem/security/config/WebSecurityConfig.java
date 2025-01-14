@@ -1,4 +1,4 @@
-package com.anthive.blogservice.basicsystem.accountsystem.security.config;
+package com.anthive.blogservice.accountsystem.security.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

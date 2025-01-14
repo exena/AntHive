@@ -1,9 +1,9 @@
-package com.anthive.blogservice.basicsystem.accountsystem.security;
+package com.anthive.blogservice.accountsystem.security;
 
-import com.anthive.blogservice.basicsystem.accountsystem.base.AccountRepository;
-import com.anthive.blogservice.basicsystem.accountsystem.base.model.Account;
-import com.anthive.blogservice.basicsystem.accountsystem.security.dto.AccountContext;
-import com.anthive.blogservice.basicsystem.accountsystem.security.dto.CustomPrincipal;
+import com.anthive.blogservice.accountsystem.base.AccountRepository;
+import com.anthive.blogservice.accountsystem.base.model.Account;
+import com.anthive.blogservice.accountsystem.security.dto.AccountContext;
+import com.anthive.blogservice.accountsystem.security.dto.CustomPrincipal;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
