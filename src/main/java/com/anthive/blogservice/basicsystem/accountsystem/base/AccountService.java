@@ -1,5 +1,8 @@
-package com.anthive.blogservice.basicsystem.accountsystem;
+package com.anthive.blogservice.basicsystem.accountsystem.base;
 
+import com.anthive.blogservice.basicsystem.accountsystem.base.dto.AccountRegisterRequest;
+import com.anthive.blogservice.basicsystem.accountsystem.base.model.Account;
+import com.anthive.blogservice.basicsystem.accountsystem.base.model.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,10 +17,10 @@ public class AccountService {
 
     private final PasswordEncoder passwordEncoder;
 
-    public void register(PostAccountRegisterRequest request){
+    public void register(AccountRegisterRequest request){
         String encodedPassword = passwordEncoder.encode(request.getPassword());
         Role role = new Role(1L);
-        Account account = new Account(request.getUsername(),encodedPassword,true, List.of(role));
+        Account account = new Account(request.getLoginId(),encodedPassword,true, List.of(role));
         accountRepository.save(account);
     }
 }

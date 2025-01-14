@@ -12,13 +12,15 @@
 </head>
 <body class="text-center">
 
-    <form class="form-signin" th:action="@{/account/register}" method="post">
+    <form class="form-signin" th:action="@{/account/register}" th:object="${registerRequest}" method="post">
         <a th:href="@{/}"><img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"></a>
         <h1 class="h3 mb-3 font-weight-normal">회원가입</h1>
-        <label for="username" class="sr-only">Username</label>
-        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+        <p class="valid-warning" th:errors=*{loginId}></p>
+        <label for="loginId" class="sr-only">User ID</label>
+        <input type="text" id="loginId" name="loginId" class="form-control" placeholder="Username" required autofocus>
+        <p class="valid-warning" th:errors=*{password}></p>
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
 <!--        <div class="checkbox mb-3">-->
 <!--            <label>-->
 <!--                <input type="checkbox" value="remember-me"> Remember me-->

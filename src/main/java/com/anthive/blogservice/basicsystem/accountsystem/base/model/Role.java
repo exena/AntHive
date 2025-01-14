@@ -1,4 +1,4 @@
-package com.anthive.blogservice.basicsystem.accountsystem;
+package com.anthive.blogservice.basicsystem.accountsystem.base.model;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

@@ -1,4 +1,4 @@
-package com.anthive.blogservice.basicsystem.accountsystem;
+package com.anthive.blogservice.basicsystem.accountsystem.base.model;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -16,7 +16,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
+    private String loginId;
     private String password;
     private Boolean enabled;
 
@@ -27,8 +27,8 @@ public class Account {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
 
-    public Account(String username, String password, Boolean enabled, List<Role> roles) {
-        this.username = username;
+    public Account(String loginId, String password, Boolean enabled, List<Role> roles) {
+        this.loginId = loginId;
         this.password = password;
         this.enabled = enabled;
         this.roles = roles;
