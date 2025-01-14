@@ -23,4 +23,8 @@ public class AccountService {
         Account account = new Account(request.getLoginId(),encodedPassword,true, List.of(role));
         accountRepository.save(account);
     }
+
+    public boolean isDuplicatedId(String loginId){
+        return accountRepository.findByLoginId(loginId) != null;
+    }
 }
