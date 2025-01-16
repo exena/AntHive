@@ -25,17 +25,17 @@ public class CategoryDto {
         return new CategoryDto(category.getId(), category.getParent().getId(), category.getName(), new ArrayList<>());
     }
 
-    public void addChildCategory(CategoryDto categoryDto){
-        childCategories.add(categoryDto);
-    }
-
-    public void addChildCategories(List<CategoryDto> categoryDto){
-        childCategories.addAll(categoryDto);
-    }
+//    public void addChildCategory(CategoryDto categoryDto){
+//        childCategories.add(categoryDto);
+//    }
+//
+//    public void addChildCategories(List<CategoryDto> categoryDto){
+//        childCategories.addAll(categoryDto);
+//    }
 
     public static List<CategoryDto> toDtoList(List<Category> categories){
 
-        NestedConvertHelper helper = NestedConvertHelper.newInstance(
+        NestedConvertHelper<Long, Category, CategoryDto> helper = NestedConvertHelper.newInstance(
                 categories,
                 CategoryDto::of,
                 Category::getParent,

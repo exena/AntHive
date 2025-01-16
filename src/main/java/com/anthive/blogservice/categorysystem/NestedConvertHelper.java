@@ -16,7 +16,7 @@ public class NestedConvertHelper<K, E, D> {
     private final Function<D, List<D>> getChildren;
 
 
-    public static <K, E, D> NestedConvertHelper newInstance(List<E> entities, Function<E, D> toDto, Function<E, E> getParent, Function<E, K> getKey, Function<D, List<D>> getChildren) {
+    public static <K, E, D> NestedConvertHelper<K, E, D> newInstance(List<E> entities, Function<E, D> toDto, Function<E, E> getParent, Function<E, K> getKey, Function<D, List<D>> getChildren) {
         return new NestedConvertHelper<>(entities, toDto, getParent, getKey, getChildren);
     }
 
