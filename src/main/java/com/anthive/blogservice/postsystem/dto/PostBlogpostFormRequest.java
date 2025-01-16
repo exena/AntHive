@@ -1,6 +1,6 @@
 package com.anthive.blogservice.postsystem.dto;
 
-import com.anthive.blogservice.category.Category;
+import com.anthive.blogservice.categorysystem.Category;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;

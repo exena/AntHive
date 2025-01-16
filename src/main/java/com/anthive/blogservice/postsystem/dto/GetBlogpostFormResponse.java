@@ -1,6 +1,6 @@
 package com.anthive.blogservice.postsystem.dto;
 
-import com.anthive.blogservice.category.Category;
+import com.anthive.blogservice.categorysystem.Category;
 import com.anthive.blogservice.postsystem.Post;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

@@ -1,7 +1,7 @@
 package com.anthive.blogservice.postsystem;
 
 import com.anthive.blogservice.accountsystem.base.model.Account;
-import com.anthive.blogservice.category.Category;
+import com.anthive.blogservice.categorysystem.Category;
 import com.anthive.blogservice.postsystem.dto.PostBlogpostFormRequest;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

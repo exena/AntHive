@@ -37,10 +37,10 @@ public class CategoryDto {
 
         NestedConvertHelper helper = NestedConvertHelper.newInstance(
                 categories,
-                c -> CategoryDto.of(c),
-                c -> c.getParent(),
-                c -> c.getId(),
-                d -> d.getChildCategories()
+                CategoryDto::of,
+                Category::getParent,
+                Category::getId,
+                CategoryDto::getChildCategories
         );
         return helper.convert();
     }

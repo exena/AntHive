@@ -3,8 +3,6 @@ package com.anthive.blogservice.categorysystem;
 import com.anthive.blogservice.accountsystem.base.model.Account;
 import com.anthive.blogservice.postsystem.Post;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.util.ArrayList;

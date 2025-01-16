@@ -1,6 +1,6 @@
 package com.anthive.blogservice.accountsystem.base.model;
 
-import com.anthive.blogservice.category.Category;
+import com.anthive.blogservice.categorysystem.Category;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

@@ -9,15 +9,15 @@ import java.util.function.Function;
 
 public class NestedConvertHelper<K, E, D> {
 
-    private List<E> entities;
-    private Function<E, D> toDto;
-    private Function<E, E> getParent;
-    private Function<E, K> getKey;    // id 값
-    private Function<D, List<D>> getChildren;
+    private final List<E> entities;
+    private final Function<E, D> toDto;
+    private final Function<E, E> getParent;
+    private final Function<E, K> getKey;    // id 값
+    private final Function<D, List<D>> getChildren;
 
 
     public static <K, E, D> NestedConvertHelper newInstance(List<E> entities, Function<E, D> toDto, Function<E, E> getParent, Function<E, K> getKey, Function<D, List<D>> getChildren) {
-        return new NestedConvertHelper<K, E, D>(entities, toDto, getParent, getKey, getChildren);
+        return new NestedConvertHelper<>(entities, toDto, getParent, getKey, getChildren);
     }
 
     private NestedConvertHelper(List<E> entities, Function<E, D> toDto, Function<E, E> getParent, Function<E, K> getKey, Function<D, List<D>> getChildren) {
@@ -57,10 +57,7 @@ public class NestedConvertHelper<K, E, D> {
     private boolean hasParent(E e) {
         // 부모가 null이 아니거나 null이 아닌 조건 중에 부모 id랑 자신의 id가 다르면 부모가 있는거임
         AtomicBoolean b = new AtomicBoolean(false);
-        if (getParent(e) != null && (getKey(getParent(e)) != getKey(e))) b.set(true);
-        else {
-            b.set(false);
-        }
+        b.set(getParent(e) != null && (getKey(getParent(e)) != getKey(e)));
         return b.get();
     }
 
