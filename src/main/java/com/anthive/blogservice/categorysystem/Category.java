@@ -1,4 +1,4 @@
-package com.anthive.blogservice.category;
+package com.anthive.blogservice.categorysystem;
 
 import com.anthive.blogservice.accountsystem.base.model.Account;
 import com.anthive.blogservice.postsystem.Post;
@@ -17,15 +17,13 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Size(min=2,max=30)
     private String name;
 
     @OneToMany(mappedBy = "category")
     private List<Post> boards = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id", referencedColumnName = "id")
+    @JoinColumn(name="account_id", referencedColumnName = "id")
     private Account account;
 
     @ManyToOne(fetch = FetchType.LAZY)

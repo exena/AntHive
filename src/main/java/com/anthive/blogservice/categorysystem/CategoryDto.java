@@ -1,0 +1,47 @@
+package com.anthive.blogservice.categorysystem;
+
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@AllArgsConstructor
+@Getter
+public class CategoryDto {
+
+    private Long categoryId;
+    private Long parentId;
+    @NotNull
+    @Size(min=1,max=30)
+    private String name;
+    private List<CategoryDto> childCategories;
+
+    public static CategoryDto of(Category category){
+        if (category.getParent() == null)
+            return new CategoryDto(category.getId(), null, category.getName(), new ArrayList<>());
+        return new CategoryDto(category.getId(), category.getParent().getId(), category.getName(), new ArrayList<>());
+    }
+
+    public void addChildCategory(CategoryDto categoryDto){
+        childCategories.add(categoryDto);
+    }
+
+    public void addChildCategories(List<CategoryDto> categoryDto){
+        childCategories.addAll(categoryDto);
+    }
+
+    public static List<CategoryDto> toDtoList(List<Category> categories){
+
+        NestedConvertHelper helper = NestedConvertHelper.newInstance(
+                categories,
+                c -> CategoryDto.of(c),
+                c -> c.getParent(),
+                c -> c.getId(),
+                d -> d.getChildCategories()
+        );
+        return helper.convert();
+    }
+}
