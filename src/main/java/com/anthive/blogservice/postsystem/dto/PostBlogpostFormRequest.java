@@ -1,5 +1,6 @@
 package com.anthive.blogservice.postsystem.dto;
 
+import com.anthive.blogservice.category.Category;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -11,4 +12,5 @@ public class PostBlogpostFormRequest {
     @Size(min=1, max=50)
     private String title;
     private String content;
+    private Category category;
 }

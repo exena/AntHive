@@ -1,5 +1,6 @@
 package com.anthive.blogservice.accountsystem.base.model;
 
+import com.anthive.blogservice.category.Category;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -27,6 +28,9 @@ public class Account {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
 
+    @OneToMany(mappedBy = "account")
+    private List<Category> categories;
+
     public Account(String loginId, String password, Boolean enabled, List<Role> roles) {
         this.loginId = loginId;
         this.password = password;
@@ -34,7 +38,4 @@ public class Account {
         this.roles = roles;
     }
 
-    public Account(String loginId){
-        this.loginId = loginId;
-    }
 }
