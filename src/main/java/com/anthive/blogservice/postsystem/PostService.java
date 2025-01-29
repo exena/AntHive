@@ -47,4 +47,8 @@ public class PostService {
         }
     }
 
+    public void deletePost(Long postId, Authentication auth){
+        checkAuthorPermission(postId, auth);
+        postRepository.deleteById(postId);
+    }
 }
