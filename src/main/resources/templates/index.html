@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카테고리 트리</title>
+</head>
+<body>
+<h1>카테고리 트리</h1>
+
+<ul id="category-tree">
+    <!-- 카테고리 목록이 여기서 출력될 예정입니다. -->
+</ul>
+
+<script th:inline="javascript">
+    // 페이지가 로드되면 API 호출을 통해 카테고리 데이터를 가져옵니다.
+    document.addEventListener("DOMContentLoaded", function() {
+      // API 호출
+      fetch('/api/categories?username='+[[${#authentication.name}]])
+          .then(response => response.json())  // JSON 형태로 변환
+          .then(response => {
+              renderCategoryTree(response.data, document.getElementById("category-tree"));
+          })
+          .then(response => {
+              addFilterFunction(document.querySelectorAll('.category-button'),
+                                document.querySelectorAll('.post-preview'));
+          })
+          .catch(error => {
+              console.error("API 요청 오류:", error);
+          });
+    });
+
+    // 카테고리 트리를 렌더링하는 함수
+    function renderCategoryTree(categories, parentElement) {
+      categories.forEach(category => {
+          const li = document.createElement("li");
+          const button = document.createElement('button');
+          button.textContent = category.name;
+          button.classList.add("category-button");
+          li.appendChild(button);
+
+          // 자식 카테고리가 있다면 재귀적으로 하위 항목 렌더링
+          if (category.children && category.children.length > 0) {
+              const ul = document.createElement("ul");
+              renderCategoryTree(category.children, ul);  // 자식 카테고리
+              li.appendChild(ul);
+          }
+
+          parentElement.appendChild(li);
+      });
+    }
+
+    function addFilterFunction(buttons, posts) {
+    Array.prototype.forEach.call(buttons, button => {
+        button.addEventListener('click', () => {
+            showOnly(posts, button);
+        });
+    });
+    }
+
+    function showOnly(posts, button){
+      console.log("몇번?");
+      // 특정 카테고리의 포스트만 표시하고, 다른 포스트 숨기기
+      Array.prototype.forEach.call(posts, post => {
+          const categorySpan = post.querySelector('.category-span');
+          if (categorySpan && categorySpan.textContent === button.textContent) {
+              post.style.display = '';  // 해당 포스트 표시
+          } else {
+              post.style.display = 'none';  // 이외에는 숨기기
+          }
+      });
+    }
+</script>
+</body>
+</html>
