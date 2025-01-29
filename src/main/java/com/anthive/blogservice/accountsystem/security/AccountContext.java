@@ -1,5 +1,6 @@
 package com.anthive.blogservice.accountsystem.security;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +11,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AccountContext implements UserDetails {
 
+    @Getter
+    private final Long id;
     private final String loginId;
     private final String password;
     private final Boolean enabled;
