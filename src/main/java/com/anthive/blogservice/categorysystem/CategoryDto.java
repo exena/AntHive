@@ -1,5 +1,6 @@
 package com.anthive.blogservice.categorysystem;
 
+import com.anthive.blogservice.utils.NestedConvertHelper;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -17,7 +18,7 @@ public class CategoryDto {
     @NotNull
     @Size(min=1,max=30)
     private String name;
-    private List<CategoryDto> childCategories;
+    private List<CategoryDto> children;
 
     public static CategoryDto of(Category category){
         if (category.getParent() == null)
@@ -40,7 +41,7 @@ public class CategoryDto {
                 CategoryDto::of,
                 Category::getParent,
                 Category::getId,
-                CategoryDto::getChildCategories
+                CategoryDto::getChildren
         );
         return helper.convert();
     }

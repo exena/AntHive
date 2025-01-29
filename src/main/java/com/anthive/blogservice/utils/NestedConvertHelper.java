@@ -1,4 +1,4 @@
-package com.anthive.blogservice.categorysystem;
+package com.anthive.blogservice.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;

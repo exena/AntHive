@@ -1,19 +1,23 @@
 package com.anthive.blogservice.categorysystem;
 
-import jakarta.transaction.Transactional;
+import com.anthive.blogservice.accountsystem.base.AccountRepository;
+import com.anthive.blogservice.accountsystem.base.model.Account;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class CategoryService {
 
-    private final CategoryRepository categoryRepository;
+    private final CategoryQuerydslRepository categoryQuerydslRepository;
 
-    public List<CategoryDto> getTotalCategories() {
-        List<Category> categoryList = categoryRepository.findAllOrderByParentIdAscNullsFirstCategoryIdAsc();
+    private final AccountRepository accountRepository;
+
+    public List<CategoryDto> getAccountsCategories(String username) {
+        Account account = accountRepository.findByLoginId(username);
+        List<Category> categoryList = categoryQuerydslRepository.findByAccountOrderByParentIdAscNullsFirstCategoryIdAsc(account.getId());
         return CategoryDto.toDtoList(categoryList);
     }
 }

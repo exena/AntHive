@@ -2,6 +2,7 @@ package com.anthive.blogservice.categorysystem;
 
 import com.anthive.blogservice.accountsystem.base.model.Account;
 import com.anthive.blogservice.postsystem.Post;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -18,7 +19,7 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category")
-    private List<Post> boards = new ArrayList<>();
+    private List<Post> boards;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="account_id", referencedColumnName = "id")
@@ -26,6 +27,7 @@ public class Category {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="parent_id")
+    @JsonIgnore
     private Category parent;
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true)

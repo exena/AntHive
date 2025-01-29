@@ -1,26 +1,25 @@
 package com.anthive.blogservice.categorysystem;
 
+import com.anthive.blogservice.utils.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/category")
-public class CategoryController {
+@RequestMapping("/api")
+public class CategoryApiController {
 
-    @Autowired
     private final CategoryService categoryService;
 
     //조회
-    @Secured("ROLE_USER")
-    @GetMapping("/total")
-    public ApiResponse<List<CategoryDto>> getTotalCategories() {
-        return ApiResponse.ok(categoryService.getTotalCategories());
+    @GetMapping(value = "/categories", params = {"username"})
+    public ApiResponse<List<CategoryDto>> getTotalCategories(@RequestParam("username") String username) {
+        return ApiResponse.ok(categoryService.getAccountsCategories(username));
     }
 }

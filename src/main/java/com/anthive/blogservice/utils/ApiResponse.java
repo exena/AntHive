@@ -1,4 +1,4 @@
-package com.anthive.blogservice.categorysystem;
+package com.anthive.blogservice.utils;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
