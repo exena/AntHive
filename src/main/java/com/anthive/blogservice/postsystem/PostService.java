@@ -36,7 +36,7 @@ public class PostService {
     public void editPost(String userId, PostBlogpostFormRequest request){
         Post post = getPost(request.getPostId());
         post.setTitle(request.getTitle());
-        post.setContent(request.getContent());
+        post.setContent(Post.getDecodedContent(request.getContent()));
         postRepository.save(post);
     }
 

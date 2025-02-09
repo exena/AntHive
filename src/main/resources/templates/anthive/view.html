@@ -1,61 +1,35 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/common :: head(${post.title})">
-<style>
-
-</style>
+<head th:replace="fragments/common :: head(${postForm.title})">
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.min.css" />
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common :: menu(null)">
 </nav>
 
 <div class="container" id="container1">
-    <h2 th:text="${post.title}">글제목</h2>
+    <h2 th:text="${postForm.title}">글제목</h2>
     <br>
-    <p th:utext="${post.content}">글내용</p>
+    <div id="viewer"></div>
 </div>
 
-<script>
-limitAllImgsMaxWidth();
-removesAllPsMargin();
-//이미지 배열을 리턴
-function getImgArray(){
-    var container = document.getElementById("container1");
-    var imgList = container.getElementsByTagName("img");
-    var imgArray = Array.prototype.slice.call(imgList);
-    return imgArray;
-}
-//모든 이미지의 최대폭을 컨테이너폭에 맞춘다.
-function limitAllImgsMaxWidth() {
-    var imgArray = getImgArray();
-    imgArray.forEach(function(img,index){
-        img.style.maxWidth="100%";
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.js"></script>
+<script th:inline="javascript">
+    // Thymeleaf를 통해 서버에서 전달된 content 데이터를 가져옵니다.
+    const postContent = /*<![CDATA[*/ [[${postForm.content}]] /*]]*/;
+
+    // ToastUI Editor 초기화
+    const viewer = new toastui.Editor({
+        el: document.querySelector('#viewer'),
+        height: 'auto',
+        initialValue: '', // 초기값 없이 시작
+        toolbarItems: [],
     });
-}
-//p태그 배열을 리턴
-function getPArray(){
-    var container = document.getElementById("container1");
-    var pList = container.getElementsByTagName("p");
-    var pArray = Array.prototype.slice.call(pList);
-    return pArray;
-}
-//모든 p태그의 마진을 없앤다.
-function removesAllPsMargin() {
-    var pArray = getPArray();
-    pArray.forEach(function(p,index){
-        p.style.margin = '0 0 4px';
-    });
-}
+
+
+    // 서버에서 받은 content 데이터를 에디터에 설정
+    viewer.setMarkdown(postContent);
 </script>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
 </body>
 </html>

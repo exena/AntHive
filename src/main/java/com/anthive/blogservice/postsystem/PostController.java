@@ -5,6 +5,7 @@ import com.anthive.blogservice.accountsystem.base.model.Account;
 import com.anthive.blogservice.postsystem.dto.GetBlogpostFormResponse;
 import com.anthive.blogservice.postsystem.dto.PostBlogpostFormRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -20,6 +21,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/anthive")
 @RequiredArgsConstructor
 public class PostController {
+
+    @Value("${image-url}")
+    private String imgUrl;
 
     private final PostService postService;
 
@@ -39,7 +43,8 @@ public class PostController {
 
     @GetMapping(value = "/form", params = {})
     public String form(Model model) {
-        model.addAttribute("post", new GetBlogpostFormResponse());
+        model.addAttribute("postForm", new GetBlogpostFormResponse());
+        model.addAttribute("imageUrl", imgUrl);
         return "anthive/form";
     }
 
@@ -48,7 +53,8 @@ public class PostController {
     public String form(Model model, @RequestParam("postId") Long postId, Authentication auth) {
         try {
             postService.checkAuthorPermission(postId, auth);
-            model.addAttribute("post", GetBlogpostFormResponse.of(postService.getPost(postId)));
+            model.addAttribute("postForm", GetBlogpostFormResponse.of(postService.getPost(postId)));
+            model.addAttribute("imageUrl", imgUrl);
         } catch (Exception e){
             return "redirect:/anthive/form";
         }
@@ -79,7 +85,7 @@ public class PostController {
     @GetMapping(value = "/{userId}/post/{postId}")
     public String view(Model model, @PathVariable("postId") Long postId){
         Post post = postService.getPost(postId);
-        model.addAttribute("post", post);
+        model.addAttribute("postForm", GetBlogpostFormResponse.of(post));
         return "anthive/view";
     }
 
