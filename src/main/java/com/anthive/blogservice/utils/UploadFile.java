@@ -1,4 +1,4 @@
-package com.anthive.blogservice.imagesystem;
+package com.anthive.blogservice.utils;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

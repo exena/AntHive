@@ -1,11 +1,10 @@
 package com.anthive.blogservice.imagesystem;
 
 import com.anthive.blogservice.postsystem.Post;
+import com.anthive.blogservice.utils.UploadFile;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 @Entity
 @AllArgsConstructor

@@ -1,4 +1,4 @@
-package com.anthive.blogservice.imagesystem;
+package com.anthive.blogservice.utils;
 
 import org.springframework.web.multipart.MultipartFile;
 
