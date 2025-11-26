@@ -1,4 +1,5 @@
 # 게시판 서비스
+<img width="1920" height="1080" alt="301190802-0d04118f-0021-44fe-aebb-2ce835b06703" src="https://github.com/user-attachments/assets/5de20ed3-d621-4445-bab0-6070367305a1" />
 
 ## 제작과정
 - 백엔드는 Java Spring Boot 와 MariaDB를 사용했습니다.
